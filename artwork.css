@@ -1,0 +1,48 @@
+@font-face { font-family: "Chakra Petch"; src: url("fonts/chakra-petch-bold-italic.ttf") format("truetype"); font-style: italic; font-weight: 700; font-display: swap; }
+:root { --artwork-text: rgba(255,255,255,.92); }
+body { font-family: Arial, Helvetica, sans-serif; }
+/* Projected labels may leave the screen; keep them inside the artwork viewport. */
+#beacons, #skylabels, #solarlabels { overflow: hidden; }
+#title, #lang, #solarstrip, #galaxystrip, #exhibit-badge, #exhibit-gravity { display: none !important; }
+#artwork-title { position: fixed; top: max(30px, env(safe-area-inset-top)); left: max(38px, env(safe-area-inset-left)); z-index: 30; pointer-events: none; color: var(--artwork-text); }
+#artwork-title h1 { margin: 0; font: italic 700 54px/.88 "Chakra Petch", "Arial Black", Arial, sans-serif; letter-spacing: -.045em; transform: skewX(-7deg); transform-origin: left center; }
+#artwork-title h1 small { display: block; margin: 0 0 9px 3px; font-size: 12px; line-height: 1; letter-spacing: .34em; }
+#artwork-title h1>span { position: relative; display: block; width: max-content; }
+#artwork-title h1>span:last-child { margin-left: 8px; }
+#artwork-fullscreen, #audiobtn { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,.26); border-radius: 2px; color: #eee; background: rgba(8,12,20,.42); cursor: pointer; backdrop-filter: blur(10px); }
+#artwork-fullscreen { position: fixed; top: max(30px, env(safe-area-inset-top)); right: max(28px, env(safe-area-inset-right)); z-index: 40; }
+#artwork-fullscreen svg { width: 16px; height: 16px; }
+#artwork-fullscreen[hidden] { display: none !important; }
+#artwork-fullscreen:hover, #audiobtn:hover { border-color: rgba(255,255,255,.45); background: rgba(8,12,17,.74); }
+#audio { top: max(30px, env(safe-area-inset-top)); right: max(80px, calc(env(safe-area-inset-right) + 52px)); bottom: auto; z-index: 40; }
+#audiolist { position: absolute; right: 0; top: 44px; min-width: 170px; }
+#artwork-credit { position: fixed; bottom: max(28px, env(safe-area-inset-bottom)); left: max(38px, env(safe-area-inset-left)); z-index: 30; color: rgba(255,255,255,.48); font: italic 700 9px Arial,sans-serif; letter-spacing: .18em; text-decoration: none; }
+#artwork-credit span { margin-left: 10px; opacity: .5; }
+#artwork-credit:hover { color: var(--artwork-text); }
+#skyback, #solarback { top: 228px; left: 38px; font-family: Arial,sans-serif; font-style: italic; font-weight: 700; }
+#beacon-panel { top: 94px; right: 28px; max-height: calc(100dvh - 322px); }
+#beacon-panel #bp-name { font-family: "Chakra Petch",Arial,sans-serif; font-style: italic; font-weight: 700; }
+#solartime { left: 38px; bottom: 64px; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--artwork-text); outline-offset: 5px; }
+.gx-cinema #artwork-title, .gx-cinema #artwork-credit, .gx-cinema #artwork-fullscreen { display: none; }
+body[data-view="solar"] #artwork-title h1, body[data-view="sky"] #artwork-title h1 { font-size: 34px; }
+body[data-view="solar"] #solarback, body[data-view="sky"] #skyback { top: 154px; }
+@media(max-width: 640px) {
+  #artwork-title { top: max(25px, env(safe-area-inset-top)); left: 24px; }
+  #artwork-title h1 { font-size: 39px; }
+  #artwork-title h1 small { font-size: 9px; letter-spacing: .25em; }
+  #artwork-fullscreen { top: auto; bottom: max(22px, env(safe-area-inset-bottom)); left: 22px; right: auto; }
+  #audio { top: auto; bottom: max(22px, env(safe-area-inset-bottom)); left: 72px; right: auto; }
+  #audiolist { top: auto; bottom: 44px; left: 0; right: auto; }
+  #artwork-credit { left: 22px; bottom: max(78px, calc(env(safe-area-inset-bottom) + 56px)); }
+  #artwork-credit span { display: none; }
+  #skyback, #solarback { left: 22px; }
+  body[data-view="solar"] #artwork-title h1, body[data-view="sky"] #artwork-title h1 { font-size: 29px; }
+  body[data-view="solar"] #solarback, body[data-view="sky"] #skyback { top: 139px; }
+  #solartime { left: 22px; top: 184px; bottom: auto; gap: 3px; }
+  #solartime button { padding: 5px 8px; }
+  #beacon-panel { top: auto; bottom: 0; right: 0; left: 0; max-height: 48dvh; z-index: 1000002; }
+  body:has(#beacon-panel.open) #cf-camera { bottom: calc(48dvh + 12px); }
+  body:has(#beacon-panel.open) #audio, body:has(#beacon-panel.open) #artwork-fullscreen,
+  body:has(#beacon-panel.open) #artwork-credit, body:has(#beacon-panel.open) #solartime { visibility: hidden; }
+}

@@ -1,0 +1,127 @@
+#cf-camera {
+  position: fixed;
+  right: max(24px, env(safe-area-inset-right));
+  bottom: max(24px, env(safe-area-inset-bottom));
+  z-index: 1000001;
+  width: 240px;
+  height: 180px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .32);
+  border-radius: 12px;
+  background: rgba(6, 10, 22, .7);
+  box-shadow: 0 12px 44px rgba(0, 0, 0, .18), inset 0 0 24px rgba(255, 255, 255, .025);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #fff;
+  font: 11px/1.4 ui-sans-serif, system-ui, sans-serif;
+  isolation: isolate;
+  pointer-events: auto;
+}
+#cf-camera video,
+#cf-camera canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+#cf-camera video {
+  object-fit: cover;
+  object-position: center;
+  transform: scaleX(-1);
+  opacity: .78;
+}
+#cf-camera canvas { z-index: 1; }
+#cf-camera[data-state="idle"] video,
+#cf-camera[data-state="paused"] video,
+#cf-camera[data-state="failed"] video { opacity: 0; }
+#cf-camera .cf-camera-controls {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 40px;
+  padding: 4px 8px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(transparent, rgba(3, 6, 16, .8));
+}
+#cf-camera button {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  padding: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: rgba(5, 9, 20, .35);
+  border: 1px solid rgba(255, 255, 255, .23);
+  border-radius: 50%;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+#cf-camera button:hover { background: rgba(255, 255, 255, .16); }
+#cf-camera button:focus-visible,
+#cf-camera select:focus-visible { outline: 2px solid white; outline-offset: -3px; }
+#cf-camera svg { display: block; width: 17px; height: 17px; }
+#cf-camera .cf-camera-off { opacity: 0; }
+#cf-camera button[aria-pressed="false"] .cf-camera-off { opacity: 1; }
+#cf-camera .cf-camera-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  flex: 0 0 auto;
+  margin: 0 3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .3);
+  transition: background .25s, box-shadow .25s;
+}
+#cf-camera[data-state="running"] .cf-camera-dot {
+  background: rgba(255, 255, 255, .75);
+  box-shadow: 0 0 5px rgba(255, 255, 255, .35);
+}
+#cf-camera[data-tracking="true"] .cf-camera-dot {
+  background: #fff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, .9);
+}
+#cf-camera .cf-camera-status {
+  flex: 1;
+  min-width: 0;
+  color: rgba(255, 255, 255, .85);
+  letter-spacing: .03em;
+}
+#cf-camera select {
+  position: absolute;
+  z-index: 3;
+  left: 8px;
+  bottom: 44px;
+  width: calc(100% - 16px);
+  box-sizing: border-box;
+  background: rgba(7, 12, 26, .95);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 5px;
+  padding: 6px;
+  font: inherit;
+}
+#cf-camera [hidden] { display: none !important; }
+@media (max-width: 700px), (max-height: 500px) {
+  #cf-camera {
+    width: 144px;
+    height: 108px;
+    right: max(14px, env(safe-area-inset-right));
+    bottom: max(14px, env(safe-area-inset-bottom));
+    border-radius: 9px;
+    font-size: 10px;
+  }
+  #cf-camera .cf-camera-controls { height: 34px; padding: 3px 5px; gap: 3px; }
+  #cf-camera button { width: 26px; height: 26px; padding: 5px; }
+  #cf-camera select { bottom: 37px; }
+}
